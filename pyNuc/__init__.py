@@ -1,0 +1,1 @@
+from _class_element import isotope
