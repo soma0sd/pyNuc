@@ -6,8 +6,15 @@ Created on Tue Oct 11 21:01:02 2016
 import numpy as np
 
 
+class pyNucError(Exception):
+    pass
+
+
 class isotope:
-    def __init__(self, *arg, **kw):
+    def __init__(self, *arg: "A, Z", **kw):
+        if not len(arg) == 2:
+            raise pyNucError("isotope format: isotope(A: int, Z: int)")
+        A, Z = arg[0], arg[1]  # find from ENSDF
         self.info = {'A': 1, 'Z': 1, 'dc': 0}
         self.info.update(kw)
 
