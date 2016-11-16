@@ -5,14 +5,18 @@ Created on Sun Nov  6 22:46:42 2016
 """
 
 def ENSDF_paths():
+  import ENSDF00
+  from os import path
   import os
   data = []
-  root = os.path.join(os.path.dirname(__file__),'ensdf')
-  drList = os.listdir(root)
-  for d1 in drList:
-    ur = os.path.join(root, d1)
-    for d2 in os.listdir(ur):
-      data.append(os.path.join(ur, d2))
+  root = path.dirname(ENSDF00.__file__)
+  root = path.join(root,"..")
+  root = path.join(path.abspath(root), 'ensdf')
+  list_dr = os.listdir(root)
+  for d1 in list_dr:
+    m = path.join(root, d1)
+    for d2 in os.listdir(m):
+      data.append(path.join(m, d2))
   return data
 
 

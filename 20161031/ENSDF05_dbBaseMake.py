@@ -8,7 +8,6 @@ data['range'] = {'AAA': [Z range]}
 data['data'] = {'AAAZZZ': {'key': isotopes data}}
 """
 import ENSDF00 as ref
-import pickle
 import re
 
 tSymb = ref.trans_symbol()

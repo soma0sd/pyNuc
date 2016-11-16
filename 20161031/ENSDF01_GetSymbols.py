@@ -11,7 +11,7 @@ import os
 import re
 
 
-drRoot = os.path.join(os.path.dirname(__file__),'ensdf')
+drRoot = os.path.join(os.path.dirname(__file__).replace('20161031', ''),'ensdf')
 drList = os.listdir(drRoot)
 rexA = re.compile(r'^(?P<nucid>[ \d]{2}\d\w[ \w]) ')
 
