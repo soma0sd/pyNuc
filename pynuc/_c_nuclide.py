@@ -9,16 +9,16 @@ class nuclide:
     type1 = re.compile('(\d{3})(\d{3})').match(nucid)
     type2 = re.compile('(\d{1,3})([A-z][a-z]{0,2})').match(nucid)
     if type1:
-      if nucid in _nuc.data_nuc.keys():
-        self.info = _nuc.data_nuc[nucid]
+      if nucid in _nuc._data_nuc.keys():
+        self.info = _nuc._data_nuc[nucid]
       else:
         raise NuclideError(str(nucid)+" is not exist ENSDF DB")
     elif type2:
       A = int(type2.group(1))
       Z = serch_s2z(type2.group(2))
       nucid = "{:03d}{:03d}".format(Z, A)
-      if nucid in _nuc.data_nuc.keys():
-        self.info = _nuc.data_nuc[nucid]
+      if nucid in _nuc._data_nuc.keys():
+        self.info = _nuc._data_nuc[nucid]
       else:
         raise NuclideError(str(nucid)+" is not exist ENSDF DB")
     self.Z, self.A = int(nucid[:3]), int(nucid[3:])
@@ -69,8 +69,8 @@ class NuclideError(Exception):
 
 def serch_s2z(sym):
   Z = -1
-  for key in _nuc.data_nist.keys():
-    if sym == _nuc.data_nist[key]['SYM']:
+  for key in _nuc._data_nist.keys():
+    if sym == _nuc._data_nist[key]['SYM']:
       Z = int(key[:3])
       break
   if Z == -1:
@@ -80,9 +80,9 @@ def serch_s2z(sym):
 
 def serch_z2s(Z: int):
   sym = ''
-  for key in _nuc.data_nist.keys():
+  for key in _nuc._data_nist.keys():
     if '{:03d}'.format(Z) == key[:3]:
-      sym = _nuc.data_nist[key]['SYM']
+      sym = _nuc._data_nist[key]['SYM']
       break
   if sym == '':
     raise NuclideError('Symbol '+sym+' not exist')
