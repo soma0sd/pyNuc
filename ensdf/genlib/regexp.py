@@ -165,6 +165,7 @@ def _decay_product(mode, key):
     m2 = rex2.match(m[0])
     m3 = rex3.match(m[0])
     dZ, dA = 0, 0
+    x = 0
     if m3:
       for i in m3.groups():
         _Z, _A = _prod_decay(i)
@@ -179,13 +180,15 @@ def _decay_product(mode, key):
       try:
         for i in m1.groups():
           _Z, _A = _prod_decay(i)
+          if _Z is None:
+            x = 1
           dZ += _Z
           dA += _A
       except:
         print(key, m)
-        break
     code = "{:03d}{:03d}".format(Z+dZ, A+dA)
-    data.append([m[0], m[1], code])
+    if x == 0:
+      data.append([m[0], m[1], code])
   return data
 
 
@@ -202,11 +205,11 @@ _dA.update({'%B+2P': 2,  '%2N': -2, '%N': -1, '%B-3N': -3, '%B-A': -4})
 _dZ.update({'%B-4N': 1})
 _dA.update({'%B-4N': -4})
 
-_dZ['%{+34}Si'] = _dA['%{+34}Si'] = _dZ['%{+20}Ne'] = _dA['%{+20}Ne'] = 0
-_dZ['%Ne'] = _dA['%Ne'] = _dZ['%{+24}Ne'] = _dA['%{+24}Ne'] = 0
-_dZ['%{+25}Ne'] = _dA['%{+25}Ne'] = _dZ['%Mg'] = _dA['%Mg'] = 0
-_dZ['%{+28}Mg'] = _dA['%{+28}Mg'] = _dZ['%{+22}Ne'] = _dA['%{+22}Ne'] = 0
-_dZ['%2|e'] = _dA['%2|e'] = 0
+_dZ['%{+34}Si'] = _dA['%{+34}Si'] = _dZ['%{+20}Ne'] = _dA['%{+20}Ne'] = None
+_dZ['%Ne'] = _dA['%Ne'] = _dZ['%{+24}Ne'] = _dA['%{+24}Ne'] = None
+_dZ['%{+25}Ne'] = _dA['%{+25}Ne'] = _dZ['%Mg'] = _dA['%Mg'] = None
+_dZ['%{+28}Mg'] = _dA['%{+28}Mg'] = _dZ['%{+22}Ne'] = _dA['%{+22}Ne'] = None
+_dZ['%2|e'] = _dA['%2|e'] = None
 
 def _prod_decay(mode):
   dZ, dA = _dZ, _dA
