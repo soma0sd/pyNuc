@@ -22,14 +22,14 @@ def _get_nist_data():
   return data
 
 try:
-  data_nuc
+  _data_nuc
 except:
-  data_nuc = _get_nuc_data()
+  _data_nuc = _get_nuc_data()
 
 try:
-  data_nist
+  _data_nist
 except:
-  data_nist = _get_nist_data()
+  _data_nist = _get_nist_data()
 
 from pynuc._c_nuclide import nuclide
 from pynuc._c_chain import chain
