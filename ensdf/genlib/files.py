@@ -22,3 +22,10 @@ def get_file(A:int=0):
 
 def get_all_files():
   return [open(i, 'r') for i in get_file_path()]
+
+
+def get_nist_file():
+  from os import path
+  from ensdf import genlib
+  dr = path.abspath(path.join(path.abspath(genlib.__file__), '..'))
+  return open(path.join(dr, 'nist_m_comp.asc'), 'r')

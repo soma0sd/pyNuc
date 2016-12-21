@@ -54,6 +54,52 @@ def get_ground_level():
   print()
   return data
 
+
+def get_nist():
+  import re
+  data = {}
+  iso = []
+  card = []
+  re_C = re.compile('^[_]+$')
+  re_i = re.compile('^(.{3}) (.{3}) (.{3})  (.{1,18})[ ]*(.{0,13})')
+  re_f = re.compile('[\d\.]+')
+  f = files.get_nist_file()
+  for l in f.readlines()[3:]:
+    l = l.replace('\n', '')
+    if re_C.match(l):
+      iso.append(card)
+      card = []
+    else:
+      card.append(l)
+  for c in iso:
+    m1 = re_i.match(c[0])
+    main = m1.groups()
+    Z = int(main[0])
+    symbol = main[1].strip()
+    mass = float(re_f.match(main[3]).group(0))
+    if re_f.match(main[4]):
+      na = float(re_f.match(main[4]).group(0))
+    else:
+      na = 0.0
+    code = "{:03d}{:03d}".format(Z, int(main[2]))
+    data[code] = {'SYM': symbol, 'M': mass, 'IS': na}
+    for cs in c[1:]:
+      m2 = re_i.match(cs)
+      sub = m2.groups()
+      mass = float(re_f.match(sub[3]).group(0))
+      if re_f.match(sub[4]):
+        na = float(re_f.match(sub[4]).group(0))
+      else:
+        na = 0.0
+      code = "{:03d}{:03d}".format(Z, int(sub[2]))
+      data[code] = {'SYM': symbol, 'M': mass, 'IS': na}
+  data['000001'] = {'SYM': 'n', 'M': 1.008664916, 'IS': 0.0}
+  return data
+
+data = 0
 data = get_ground_level()
+nist = get_nist()
 f = open('nucinfo.pkl', 'wb')
 pickle.dump(data, f)
+f = open('nist.pkl', 'wb')
+pickle.dump(nist, f)
