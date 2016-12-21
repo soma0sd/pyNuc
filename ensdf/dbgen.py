@@ -41,6 +41,7 @@ def get_ground_level():
         data[key]['E'] = lv['E']
         data[key]['J'] = lv['J']
         data[key]['T'] = lv['T']
+        data[key]['MODE'] = []
         mods = ''
         for l2 in c[ixl+1:]:
           de = regexp.re_level_decay(l2)

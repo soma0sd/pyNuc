@@ -29,7 +29,7 @@ _l     = '(?P<L>.{9})'
 _s     = '(?P<S>.{10})(?P<DS>.{2})'
 _c     = '(?P<C>.)'
 _ms    = '(?P<MS>.{3})'
-_dm    = '(?P<MODS>%.+)'
+_dm    = '(?P<MODS>.+)'
 
 def re_level_rec(l):
   import re
