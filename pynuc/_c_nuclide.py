@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-s
 import pynuc as _nuc
-
 import numpy as _np
 
 
@@ -23,10 +22,14 @@ class nuclide:
       else:
         raise NuclideError(str(nucid)+" is not exist ENSDF DB")
     self.Z, self.A = int(nucid[:3]), int(nucid[3:])
+    self.N0 = weights
 
   def decay(self, time):
     lamb = self.info['T']
     return _np.exp(-lamb*time)
+
+  def get_chain(self):
+    return _nuc.chain(self)
 
   def _asc_code(self):
     return str(self.A)+serch_z2s(self.Z)
@@ -48,12 +51,14 @@ class nuclide:
       pr += 'stable'
     return pr
 
+
 class NuclideError(Exception):
     def __init__(self, msg):
         self.msg = msg
 
     def __str__(self):
         return self.msg
+
 
 def serch_s2z(sym):
   Z = -1
@@ -65,6 +70,7 @@ def serch_s2z(sym):
     raise NuclideError('Symbol '+sym+' not exist')
   return Z
 
+
 def serch_z2s(Z: int):
   sym = ''
   for key in _nuc.data_nist.keys():
@@ -74,6 +80,3 @@ def serch_z2s(Z: int):
   if sym == '':
     raise NuclideError('Symbol '+sym+' not exist')
   return sym
-
-if __name__ == '__main__':
-  print(nuclide('092235'))

@@ -32,4 +32,5 @@ except:
   data_nist = _get_nist_data()
 
 from pynuc._c_nuclide import nuclide
+from pynuc._c_chain import chain
 
