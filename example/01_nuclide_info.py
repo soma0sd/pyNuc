@@ -4,11 +4,11 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 """get element"""
-elem1 = pn.nuclide('092235')
-elem2 = pn.nuclide('238U')
+elem1 = pn.nuclide('092235') # type 1
+elem2 = pn.nuclide('238U')   # type 2
 
 
-"""print info"""
+"""print infomation"""
 print(elem1)
 print(elem2)
 
