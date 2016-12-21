@@ -28,8 +28,11 @@ class nuclide:
     lamb = self.info['T']
     return _np.exp(-lamb*time)
 
+  def activity(self, time):
+    return self.info['T']*self.decay(time)
+
   def get_chain(self):
-    return _nuc.chain(self)
+    return _nuc.chain(self._asc_code(), self.N0)
 
   def _asc_code(self):
     return str(self.A)+serch_z2s(self.Z)
@@ -37,7 +40,11 @@ class nuclide:
   def __repr__(self):
     dm = self.info['MODE']
     pr = ' '+self._asc_code()+' '+'='*25+'\n'
-    pr += 'halflife: '+'{:.4E} sec'.format(_np.log(2)/self.info['T'])+'\n'
+    if self.info['T'] == 0:
+      hl = 'stable'
+    else:
+      hl = '{:.4E} sec'.format(_np.log(2)/self.info['T'])
+    pr += 'halflife: '+hl+'\n'
     if len(dm) == 1:
       e = nuclide(dm[0][2])
       pr += 'Decay: '+dm[0][0]+', {}'.format(dm[0][1])+', '+e._asc_code()+'\n'
@@ -48,7 +55,7 @@ class nuclide:
         e = nuclide(m[2])
         pr += '       '+m[0]+', {}'.format(m[1])+', '+e._asc_code()+'\n'
     else:
-      pr += 'stable'
+      pr += ''
     return pr
 
 
