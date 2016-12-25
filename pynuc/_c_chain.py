@@ -4,7 +4,7 @@ import numpy as _np
 
 
 class chain:
-  def __init__(self, nucid, weights: float=1.0):
+  def __init__(self, nucid: str, weights: float=1.0):
     self.C0 = _nuc.nuclide(nucid, weights)
 
   def decay_mixture(self):
