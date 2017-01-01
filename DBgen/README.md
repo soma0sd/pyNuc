@@ -1,4 +1,4 @@
-## pyNuc
+# pyNuc Data generate program
 
 Download Data files into `Downloads/` directory.
 
@@ -10,3 +10,10 @@ Download Data files into `Downloads/` directory.
 
  * [JENDL](http://wwwndc.jaea.go.jp/jendl/j40/j40.html)
 	Japanese standard library for fast breeder reactors, thermal reactors, fusion neutronics
+
+## scripts
+
+ * `run.py`: data file generate
+
+ * `plot_modification_year.py`: show ENSDF data modification years graph
+
