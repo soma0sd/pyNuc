@@ -29,3 +29,5 @@ def get_nist_file():
   from ensdf import genlib
   dr = path.abspath(path.join(path.abspath(genlib.__file__), '..'))
   return open(path.join(dr, 'nist_m_comp.asc'), 'r')
+
+
