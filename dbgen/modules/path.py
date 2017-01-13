@@ -28,6 +28,9 @@ def path_ensdf_file():
 def path_reference(filename=''):
   return _path.join(_path.join(path_root(), 'refdata'), filename)
 
+def path_db(filename=''):
+  return _path.join(_path.join(path_root(), 'db'), filename)
+
 def file_ensdf():
   data = []
   path = path_ensdf_file()

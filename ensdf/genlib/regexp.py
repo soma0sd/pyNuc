@@ -211,6 +211,14 @@ _dZ['%{+25}Ne'] = _dA['%{+25}Ne'] = _dZ['%Mg'] = _dA['%Mg'] = None
 _dZ['%{+28}Mg'] = _dA['%{+28}Mg'] = _dZ['%{+22}Ne'] = _dA['%{+22}Ne'] = None
 _dZ['%2|e'] = _dA['%2|e'] = None
 
+arr = sorted(_dZ.keys(), key=lambda x: len(x))
+
+for i in arr:
+  if _dZ[i] is None:
+    print("{:8},{:4d},{:4d}".format(i, 0, 0))
+  else:
+    print("{:8},{:4d},{:4d}".format(i, _dZ[i], _dA[i]))
+
 def _prod_decay(mode):
   dZ, dA = _dZ, _dA
   return dZ[mode], dA[mode]
